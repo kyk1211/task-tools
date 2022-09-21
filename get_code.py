@@ -21,10 +21,10 @@ print('현재경로 : ', path)
 
 # xls 파일 찾기
 file_list = os.listdir(path)
-file_list_xls = [file for file in file_list if file.endswith(".xls") or file.endswith(".xlsx")]
-
+file_list_xls = [file for file in file_list if file.endswith(".xls")]
+print("xls파일 리스트 : ", file_list_xls)
 for file_xls in file_list_xls:
-    print('파일명 : ', file_xls)
+    print('타겟 파일명 : ', file_xls)
     try:
         # xls 파일 읽기
         df = pd.read_html(f'{path}/{file_xls}', encoding='utf-8')[0]
@@ -33,7 +33,10 @@ for file_xls in file_list_xls:
         df = df[df['상태'] == '검증완료']
         arr = []
         for i in df.itertuples():
-            s = '-'.join([i[1], i[2], i[3]])
+            if (i[2] == 'CW'):
+                s = '-'.join([i[2], i[1], i[3]])
+            else:
+                s = '-'.join([i[1], i[2], i[3]])
             arr.append(s)
         df['관리번호'] = arr
         df = df[['관리번호', '상태']]
