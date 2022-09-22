@@ -27,22 +27,23 @@ print("xls파일 리스트 : ", file_list_xls)
 for file_xls in file_list_xls:
     print('타겟 파일명 : ', file_xls)
     try:
-        area = input("지역을 입력하세요. '구리', '양주', '포천', '김해', '하남' : ")
-        if (area == '구리'):
-          area_code = '31120'
-        elif (area == '양주'):
-          area_code = '31260'
-        elif (area == '포천'):
-          area_code = '31270'
-        elif (area == '하남'):
-          area_code = '31180'
-        elif (area == '김해'):
-          area_code = '38070'
-        else:
-          raise Exception("지역 입력이 잘못되었습니다.")
         df = pd.read_html(f'{path}/{file_xls}', encoding='utf-8')[0]
         xls = pd.read_html(f'{path}/{file_xls}', encoding='utf-8', converters={c:lambda x: str(x) for c in df.columns})[0]        
-        xls = xls.sort_values(by=['지주번호'], axis=0)
+        xls = xls.sort_values(by=['지주번호', '신호등번호'], axis=0)
+        area = xls[['시군구명']].values.tolist()[0]
+        if (area == '구리시'):
+          area_code = '31120'
+        elif (area == '양주시'):
+          area_code = '31260'
+        elif (area == '포천시'):
+          area_code = '31270'
+        elif (area == '하남시'):
+          area_code = '31180'
+        elif (area == '김해시'):
+          area_code = '38070'
+        else:
+          raise Exception("지역이 잘못되었습니다.")
+
         result_df = pd.DataFrame()
         mng_code = []
         
