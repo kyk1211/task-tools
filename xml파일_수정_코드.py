@@ -10,7 +10,7 @@ num = 1
 file_list = os.listdir(targetDir)
 xml_list = []
 for file in file_list:
-    if '.xml' in file:
+    if file.endswith('.xml'):
         xml_list.append(file)
 
 ##모든 .xml파일에 대해 수정
