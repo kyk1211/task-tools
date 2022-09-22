@@ -31,6 +31,10 @@ for file_xls in file_list_xls:
         xls = pd.read_html(f'{path}/{file_xls}', encoding='utf-8', converters={c:lambda x: str(x) for c in df.columns})[0]        
         xls = xls.sort_values(by=['지주번호', '신호등번호'], axis=0)
         area = xls[['시군구명']].value_counts().index.tolist()[0][0]
+        # code = xls.iloc[1]['분류코드']
+        aa = xls.iloc[:, ['분류번호']]
+        print(aa)
+        # print(code)
         if (area == '구리시'):
           area_code = '31120'
         elif (area == '양주시'):
