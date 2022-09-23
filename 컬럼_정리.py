@@ -24,11 +24,18 @@ file_list = os.listdir(path)
 file_list_xls = [file for file in file_list if file.endswith(".xls")]
 print("xls파일 리스트 : ", file_list_xls)
 
+filter_dic = {
+    '구리시': ['갈매동', '사노동', '수택동', '아천동'],
+    '양주시': ['남방동', '마전동', '산북동', '어둔동', '유양동', '고읍동', '광사동', '만송동', '삼숭동', '덕정동', '봉양동', '덕계동', '희정동', '고암동','옥정동', '율정동', '회암동'],
+    '포천시': ['가산면', '관인면', '군내면', '내촌면', '동교동', '선단동', '설운동', '어룡동', '영북면', '영중면', '이동면', '일동면', '자작동', '창수면', '화현면'],
+    '하남시': ['감복동', '감이동', '감일동', '광암동', '교산동', '망월동', '미사동', '배알미동', '상사창동', '상산곡동', '선동','초이동', '초일동', '춘궁동', '풍산동', '하사창동', '하산곡동', '학암동', '항동']
+}
+
 for file_xls in file_list_xls:
     print('타겟 파일명 : ', file_xls)
     try:
         df = pd.read_html(f'{path}/{file_xls}', encoding='utf-8')[0]
-        xls = pd.read_html(f'{path}/{file_xls}', encoding='utf-8', converters={c:lambda x: str(x) for c in df.columns})[0]        
+        xls = pd.read_html(f'{path}/{file_xls}', encoding='utf-8', converters={c:lambda x: str(x) for c in df.columns})[0]
         area = xls[['시군구명']].value_counts().index.tolist()[0][0]
         dic = {
           'SS': '도로안전표지 번호',
@@ -40,6 +47,15 @@ for file_xls in file_list_xls:
             code = xls.loc[:, ['분류번호']].value_counts().index.tolist()[0][0]
         else:
             code = 'TL'
+
+        filter_target = filter_dic[area]
+        if (area == '양주시' and (code == 'CW' or code == 'SS')):
+            for i in filter_target:
+                xls = xls[~xls['소재지 지번주소'].str.contains(i)]
+
+        if (area in ['하남시', '구리시', '포천시'] and (code == 'SS')):
+            for i in filter_target:
+                xls = xls[~xls['소재지 지번주소'].str.contains(i)]
 
         if (area == '구리시'):
             area_code = '31120'
