@@ -59,6 +59,7 @@ for file_xls in file_list_xls:
                 s = '-'.join([area_code, str(i[2]), str(i[3]), str(i[4])])
             mng_code.append(s)
         if (code == 'SS'):
+            result_df['고유번호'] = xls['고유번호']
             result_df['안전표지일련번호'] = mng_code
             result_df['도로종류'] = xls['도로종류']
             result_df['도로노선번호'] = xls['도로노선번호']
@@ -83,6 +84,7 @@ for file_xls in file_list_xls:
             result_df['데이터기준일자'] = '2022-12-15'
             result_df['기타사항']=xls["기타사항"]
         if (code == 'CW'):
+            result_df['고유번호'] = xls['고유번호']
             result_df['시도명'] = xls['시도명']
             result_df['시군구명'] = xls['시군구명']
             result_df['도로명']= xls['도로명']
@@ -111,6 +113,7 @@ for file_xls in file_list_xls:
             result_df['데이터기준일자'] = '2022-12-15'
             result_df['기타사항']=xls["기타사항"]
         if (code == 'SB'):
+            result_df['고유번호'] = xls['고유번호']
             result_df["과속방지턱관리번호"] = mng_code
             result_df["시도명"] = xls["시도명"]
             result_df["시군구명"] = xls["시군구명"]
@@ -135,6 +138,7 @@ for file_xls in file_list_xls:
             result_df["데이터기준일자"] = '2022-12-15'
             result_df['기타사항']=xls["기타사항"]
         if (code == 'TL'):
+            result_df['고유번호'] = xls['고유번호']
             result_df["시도명"] = xls["시도명"]
             result_df["시군구명"] = xls["시군구명"]
             result_df["도로종류"] = xls["도로종류"]

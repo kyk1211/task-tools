@@ -33,8 +33,8 @@ for file_xls in file_list_xls:
         df = df[df['상태'] == '검증완료']
         arr = []
         for i in df.itertuples():
-            if (i[2] == 'CW'):
-                s = '-'.join([i[2], i[1], i[3]])
+            if (i[2] == 'CW' or i[2] == 'SB'):
+                s = '-'.join([i[2], i[1]])
             else:
                 s = '-'.join([i[1], i[2], i[3]])
             arr.append(s)
