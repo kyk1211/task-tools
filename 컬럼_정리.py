@@ -36,7 +36,11 @@ for file_xls in file_list_xls:
           "TL": '신호등번호',
           'SB': '과속방지턱 관리번호'
         }
-        code = xls.loc[:, ['분류번호']].value_counts().index.tolist()[0][0]
+        if ('분류번호' in xls.columns):
+            code = xls.loc[:, ['분류번호']].value_counts().index.tolist()[0][0]
+        else:
+            code = 'TL'
+
         if (area == '구리시'):
             area_code = '31120'
         elif (area == '양주시'):
@@ -55,6 +59,8 @@ for file_xls in file_list_xls:
         for i in xls.itertuples():
             if (code == 'CW' or code == 'SB'):
                 s = '-'.join([area_code, str(i[3]), str(i[2]), str(i[4])])
+            elif (code == 'TL'):
+                s = "-".join([area_code, str(i[2]), code, str(i[3])])
             else:
                 s = '-'.join([area_code, str(i[2]), str(i[3]), str(i[4])])
             mng_code.append(s)
