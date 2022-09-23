@@ -36,6 +36,7 @@ for file_xls in file_list_xls:
     try:
         df = pd.read_html(f'{path}/{file_xls}', encoding='utf-8')[0]
         xls = pd.read_html(f'{path}/{file_xls}', encoding='utf-8', converters={c:lambda x: str(x) for c in df.columns})[0]
+        xls = xls[xls['상태'].isin(['검증완료'])]
         area = xls[['시군구명']].value_counts().index.tolist()[0][0]
         dic = {
           'SS': '도로안전표지 번호',
@@ -80,6 +81,7 @@ for file_xls in file_list_xls:
             else:
                 s = '-'.join([area_code, str(i[2]), str(i[3]), str(i[4])])
             mng_code.append(s)
+            
         if (code == 'SS'):
             result_df['고유번호'] = xls['고유번호']
             result_df['안전표지일련번호'] = mng_code
