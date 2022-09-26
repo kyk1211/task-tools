@@ -180,7 +180,7 @@ for file_xls in file_list_xls:
             result_df["신호등구분"] = xls["신호등 구분"]
             result_df["신호등색종류"] = xls["신호등색 종류"]
             result_df["신호등화방식"] = xls["신호등화 방식"]
-            result_df['신호등화방식특이사항'] = xls['신호등화방식 특이사항']
+            result_df['신호등화방식특이사항'] = xls['신호등화 방식 특이사항']
             result_df["신호등화순서"] = xls["신호등화 방식 순서"]
             result_df["신호등화시간"] = xls["신호등화 방식 시간"]
             result_df["광원종류"] = xls["광원 종류"]
