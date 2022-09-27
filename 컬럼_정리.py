@@ -76,8 +76,6 @@ for file_xls in file_list_xls:
         for i in xls.itertuples():
             if (code == 'CW' or code == 'SB'):
                 s = '-'.join([area_code, str(i[3]), str(i[2]), str(i[4])])
-            elif (code == 'TL'):
-                s = "-".join([area_code, str(i[2]), code, str(i[3])])
             else:
                 s = '-'.join([area_code, str(i[2]), str(i[3]), str(i[4])])
             mng_code.append(s)
