@@ -48,16 +48,14 @@ for file_xls in file_list_xls:
             code = xls.loc[:, ['분류번호']].value_counts().index.tolist()[0][0]
         else:
             code = 'TL'
-
-        filter_target = filter_dic[area]
-        if (area == '양주시' and (code == 'CW' or code == 'SS')):
-            for i in filter_target:
-                xls = xls[~xls['소재지 지번주소'].str.contains(i)]
-
-        if (area in ['하남시', '구리시', '포천시'] and (code == 'SS')):
-            for i in filter_target:
-                xls = xls[~xls['소재지 지번주소'].str.contains(i)]
-
+        if (area != '김해시'):
+            filter_target = filter_dic[area]
+            if (area == '양주시' and (code == 'CW' or code == 'SS')):
+                for i in filter_target:
+                    xls = xls[~xls['소재지 지번주소'].str.contains(i)]
+            if (area in ['하남시', '구리시', '포천시'] and (code == 'SS')):
+                for i in filter_target:
+                    xls = xls[~xls['소재지 지번주소'].str.contains(i)]
         if (area == '구리시'):
             area_code = '31120'
         elif (area == '양주시'):
